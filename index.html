@@ -19,9 +19,31 @@
       canvas {
         display: block;
       }
+      .video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        /* opacity: 0.5; */
+        /* border: 3px solid #f00; */
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 40vh;
+        height: 68.5vh;
+        box-sizing: border-box;
+        pointer-events: none;
+
+      }
+      .video video{
+        width: 100%;
+      }
     </style>
   </head>
   <body>
+    <div class="video">
+      <video id="video1" src="./videos/video-02.mp4" muted autoplay></video>
+    </div>
     <div id="container"></div>
     <script src="./app.js"></script>
   </body>

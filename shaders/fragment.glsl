@@ -1,5 +1,7 @@
 uniform float time;
 uniform float progress;
+uniform sampler2D t;
+uniform sampler2D t1;
 uniform sampler2D texture1;
 uniform vec4 resolution;
 varying vec2 vUv;
@@ -8,7 +10,7 @@ float PI = 3.141592653589793238;
 varying float vRand;
 uniform vec3 palette[5];
 
-uniform sampler2D t1;
+// uniform sampler2D t1;
 uniform sampler2D t2;
 uniform sampler2D mask;
 varying vec3 vPos;
@@ -39,5 +41,14 @@ void main() {
 	// gl_FragColor.a *= maskTexture.r * alpha;
 	// gl_FragColor = vec4(alpha);
 
-	// gl_FragColor = vec2(0.1,0.1);
+	// vec2 newUV = vPosition.xy / vec2(480. * 1.5, 820. * 1.5) + vec2(0.5);
+
+	vec4 tt = texture2D(t, vUv);
+	vec4 tt1 = texture2D(t1, vUv);
+	vec4 finalTexture = mix(tt, tt1, progress);
+	// gl_FragColor = vec4(vUv, 0.1, 1.0);
+	gl_FragColor = finalTexture;
+	if(gl_FragColor.r < 0.1 && gl_FragColor.b < 0.1 && gl_FragColor.g <0.1)
+		discard;
+	// gl_FragColor = vec4(1.0, 0., 0., 1);
 }
